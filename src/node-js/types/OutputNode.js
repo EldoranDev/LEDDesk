@@ -17,7 +17,8 @@ export default class OutputNode extends Node {
 
     this.inputs = [
       new Input(
-        this, 
+        this,
+        "1", 
         (con) => {
           return (con != null) ? con.value : null
         }, 

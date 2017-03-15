@@ -1,4 +1,5 @@
 import { Colors } from './colors';
+import { uuid } from './helper';
 
 /**
  * Basic Node
@@ -10,6 +11,9 @@ export class Node {
    * @param {*} options Renderer Options
    */
   constructor(params = {}, options = {x: 0, y:0, height: 100, width: 200, title: "Node"}) {
+    
+    this.id = uuid();
+
     this.inputs = [];
     this.outputs = [];
 
@@ -39,10 +43,34 @@ export class Node {
     }
   }
 
+  toJSON() {
+    return {
+      id: this.id,
+      type: this.constructor.name,
+      params: this.params,
+      options: this.options
+    }
+  }
+
   /**
    * Draw the content of the node
    */
   drawContent() {
     // Empty because this is the base node
+  }
+
+  get connectors() {
+    return [
+      ...this.inputs,
+      ...this.outputs
+    ]
+  }
+
+  destroy() {
+    for(let i = 0; i < this.connectors.length; i++) {
+      if(this.connectors[i].connection != null){
+        this.connectors[i].connection.destroy();
+      }
+    }
   }
 }

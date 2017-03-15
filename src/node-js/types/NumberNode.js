@@ -19,6 +19,7 @@ export default class NumberNode extends Node {
     this.outputs = [
       new Output(
         this,
+        "1", 
         () => this.params.number,
         {
           color: "#FFF",

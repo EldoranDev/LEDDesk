@@ -123,4 +123,13 @@ export default (p5) => {
     startConnector = null;
     }
   }
+
+  p5.keyPressed = () => {
+    if(p5.keyCode == p5.DELETE) {
+      if(selection != null) {
+        selection.destroy();
+        world.nodes.splice(world.nodes.indexOf(selection), 1);
+      }
+    }
+  }
 }

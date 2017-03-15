@@ -27,4 +27,15 @@ export class Connection {
     
     this.world.connections.splice(this.world.connections.indexOf(this), 1);
   }
+
+  toJSON() {
+    console.log({
+      output: this.output.id,
+      input: this.input.id
+    });
+    return {
+      output: this.output.id,
+      input: this.input.id
+    }
+  }
 }

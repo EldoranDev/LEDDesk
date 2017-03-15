@@ -1,5 +1,5 @@
 export class Input {
-  constructor(parent, func, options = {}) {
+  constructor(parent, id, func, options = {}) {
 
     this.options = Object.assign(
       {}, 
@@ -11,9 +11,14 @@ export class Input {
       options
     );
 
-    this.parent = parent,
+    this.idAddon = id;
+    this.parent = parent;
     this.func = func;
     this.connection = null;
+  }
+
+  get id() {
+    return this.parent.id + "-" + this.idAddon;
   }
 
   get value() {

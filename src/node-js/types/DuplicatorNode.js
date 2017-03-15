@@ -18,7 +18,8 @@ export default class DuplicatorNode extends Node {
 
     this.inputs = [
       new Input(
-        this, 
+        this,
+        "1", 
         (con) => {
           return (con != null) ? con.value : null
         }
@@ -28,10 +29,12 @@ export default class DuplicatorNode extends Node {
     this.outputs = [
       new Output(
         this,
+        "2", 
         () => this.inputs[0].value
       ),
       new Output(
         this,
+        "3", 
         () => this.inputs[0].value
       ),
     ]
