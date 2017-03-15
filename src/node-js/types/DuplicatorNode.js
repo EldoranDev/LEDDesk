@@ -1,7 +1,8 @@
 import { Node } from '../node';
 import { Input } from '../input';
+import { Output } from '../output';
 
-export default class OutputNode extends Node {
+export default class DuplicatorNode extends Node {
   constructor(params = {}, options = {x: 0, y: 0}) {
     let o = Object.assign(
       {},
@@ -9,7 +10,7 @@ export default class OutputNode extends Node {
       { 
         height: 100,
         width: 200,
-        title: "Output"
+        title: "Duplicator"
       }
     );
     
@@ -20,9 +21,19 @@ export default class OutputNode extends Node {
         this, 
         (con) => {
           return (con != null) ? con.value : null
-        }, 
-        {color: '#FFF'}
+        }
       ),
     ];
+
+    this.outputs = [
+      new Output(
+        this,
+        () => this.inputs[0].value
+      ),
+      new Output(
+        this,
+        () => this.inputs[0].value
+      ),
+    ]
   }
 }

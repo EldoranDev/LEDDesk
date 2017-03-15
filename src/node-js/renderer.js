@@ -1,10 +1,6 @@
 import { RenderNode, InsideNode, InsideNodeTitle } from './helper';
 import { Colors } from './colors';
 
-import {
-  OutputNode
-} from './types/types';
-
 export default (p5) => {
 
   let world = null;
