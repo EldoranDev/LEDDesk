@@ -28,9 +28,11 @@ export function RenderNode(p5, node, options) {
   
   for(let i = 0; i < node.inputs.length; i++) {
     let con = node.inputs[i];
-
+    
     let y = o.y + (i+1) * gap + RenderSettings.TITLE_HEIGHT;
-
+    
+    con.options.center = p5.createVector(o.x, y);
+    
     p5.ellipseMode(p5.CENTER);
     p5.fill(con.options.color);
     p5.ellipse(
@@ -52,6 +54,8 @@ export function RenderNode(p5, node, options) {
     let y = o.y + (i+1) * gap + RenderSettings.TITLE_HEIGHT;
     let x = o.x + o.width;
 
+    con.options.center = p5.createVector(x, y);
+
     p5.ellipseMode(p5.CENTER);
     p5.fill(con.options.color);
     p5.ellipse(
@@ -68,6 +72,30 @@ export function RenderNode(p5, node, options) {
   p5.pop();
 };
 
+export function RenderConnection(p5, con) {
+  p5.push();
+
+  let distance = p5.abs(con.output.options.center.x - con.input.options.center.x);
+
+  distance = p5.max(40, distance);
+
+  p5.stroke('#FFF');
+  p5.strokeWeight(3);
+  p5.noFill();
+  p5.bezier(
+    con.output.options.center.x,
+    con.output.options.center.y,
+    con.output.options.center.x + distance,
+    con.output.options.center.y,
+    con.input.options.center.x - distance,
+    con.input.options.center.y,
+    con.input.options.center.x,
+    con.input.options.center.y,
+    )
+
+  p5.pop();
+}
+
 export function InsideNode(p5, node, mouse) {
   return (
     mouse.x > node.options.x - (RenderSettings.CONNECTOR_SIZE/2) && mouse.x < node.options.x + node.options.width  + (RenderSettings.CONNECTOR_SIZE/2) &&
@@ -80,4 +108,30 @@ export function InsideNodeTitle(p5, node, mouse) {
     mouse.x > node.options.x && mouse.x < node.options.x + node.options.width &&
     mouse.y > node.options.y  && mouse.y < node.options.y + RenderSettings.TITLE_HEIGHT
   );
+}
+
+export function InsideNodeConnector(p5, node, mouse) {
+   let o = node.options;
+   let gap = (o.height - RenderSettings.TITLE_HEIGHT) / (node.inputs.length + 1);
+
+   for(let i = 0; i < node.inputs.length; i++) {
+      if(p5.pow(mouse.x - o.x, 2) + p5.pow(mouse.y - ((o.y + gap * (i+1))+20),2) < p5.pow(RenderSettings.CONNECTOR_SIZE, 2)) {
+                return {
+          pos: p5.createVector(o.x, (o.y + gap * (i+1))+20),
+          connector: node.inputs[i]
+        };
+      }
+   }
+
+   gap = (o.height - RenderSettings.TITLE_HEIGHT) / (node.outputs.length + 1);
+   for(let i = 0; i < node.outputs.length; i++) {
+      if(p5.pow(mouse.x - (o.x + o.width), 2) + p5.pow(mouse.y - ((o.y + gap * (i+1))+20),2) < p5.pow(RenderSettings.CONNECTOR_SIZE, 2)) {
+        return {
+          pos: p5.createVector(o.x + o.width, (o.y + gap * (i+1))+20),
+          connector: node.outputs[i]
+        };
+      }
+   }
+
+   return null;
 }

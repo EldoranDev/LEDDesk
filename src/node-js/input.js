@@ -4,6 +4,7 @@ export class Input {
     this.options = Object.assign(
       {}, 
       {
+        center: {x:0, y:0},
         color: '#FFF', 
         name: () => "In"
       },
