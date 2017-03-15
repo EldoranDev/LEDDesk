@@ -19,6 +19,11 @@ export class World {
     return btoa(JSON.stringify(this));
   }
 
+  clear() {
+    this.connections = [];
+    this.nodes = [];
+  }
+
   load(data) {
     let d = JSON.parse(atob(data));
     let dummy = new World();

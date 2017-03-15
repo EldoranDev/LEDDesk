@@ -1,9 +1,93 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, dialog} from 'electron';
 import { enableLiveReload } from 'electron-compile';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
+let currentFile = null;
+
+const menuTemp = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'New',
+        accelerator: 'CmdOrCtrl+N',
+        click() {
+          mainWindow.webContents.send('system', 'new');
+          currentFile = null;
+        }
+      },
+      {
+        label: 'Save',
+        accelerator: 'CmdOrCtrl+S',
+        click() {
+          save();
+        }
+      },
+      {
+        label: 'Save As',
+        accelerator: 'CmdOrCtrl+Shift+S',
+        click() {
+          saveAs();
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Load',
+        click() {
+          let file = dialog.showOpenDialog(mainWindow, {
+            properties: ['openFile'],
+            filters: [
+              {name: "DeskSketch", extensions: ['dsk']},
+              {name: "All Files", extensions: ['*']}
+            ]
+          });
+
+          if(file != null) {
+            mainWindow.webContents.send('file', file);
+            currentFile = file;
+          }
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Close',
+        click() {
+          app.exit();
+        }
+      }
+    ]
+  }
+]
+
+const save = () => {
+  if(currentFile != null) {
+    mainWindow.webContents.send('save', currentFile);
+  } else {
+    saveAs();
+  }
+}
+
+const saveAs = () => {
+  let path = dialog.showSaveDialog(mainWindow, {
+    defaultPath: app.getPath('documents'),
+    filters: [
+      {name: "DeskSketch", extensions: ['dsk']},
+      {name: "All Files", extensions: ['*']}
+    ]
+  });
+
+  if(path != null) {
+    currentFile = path;
+    mainWindow.webContents.send('save', path);
+  }
+}
 
 const createWindow = () => {
   
@@ -15,6 +99,8 @@ const createWindow = () => {
     height: 600,
     title: "LEDDesk"
   });
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemp));
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
