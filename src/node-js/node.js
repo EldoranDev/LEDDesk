@@ -10,14 +10,21 @@ export class Node {
    * 
    * @param {*} options Renderer Options
    */
-  constructor(params = {}, options = {x: 0, y:0, height: 100, width: 200, title: "Node"}) {
+  constructor(params = {}, options = {}) {
     
     this.id = uuid();
 
     this.inputs = [];
     this.outputs = [];
 
-    this.options = options;
+    this.options = Object.assign({}, 
+    {
+      x: 0, 
+      y:0, 
+      height: 100, 
+      width: 200, 
+      title: "Node",
+    }, options);
     this.params = params;
     
     this.error = false;

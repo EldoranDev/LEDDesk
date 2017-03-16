@@ -7,8 +7,6 @@ export default class OutputNode extends Node {
       {},
       options,
       { 
-        height: 100,
-        width: 200,
         title: "Output"
       }
     );

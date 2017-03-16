@@ -6,6 +6,12 @@ import { Connection } from './connection';
 import { Output } from './output';
 import { Input } from './input';
 
+import { types, Factory } from './types/types';
+
+import { remote } from 'electron';
+
+const { Menu, MenuItem } = remote;
+
 export default (p5) => {
 
   let world = null;
@@ -19,8 +25,85 @@ export default (p5) => {
   let startConnector = null;
   let connectorPos = null;
 
+  let menu = new Menu();
+
+  let isPopup = false;
+
   p5.setup = () => {
     let renderer = p5.createCanvas(window.innerWidth, window.innerHeight);
+
+    let typeNames = Object.keys(types);
+    
+    let misc = new MenuItem({
+      label: 'Misc',
+      submenu: []
+    });
+
+    let logic = new MenuItem({
+      label: 'Logic',
+      submenu: []
+    });
+
+    let input = new MenuItem({
+      label: 'Inputs',
+      submenu: []
+    });
+
+    let math = new MenuItem({
+      label: 'Math',
+      submenu: []
+    });
+
+    for(let i = 0; i < typeNames.length; i++) {
+      if(typeNames[i] === 'OutputNode') continue;
+
+      let item = new MenuItem({
+        label: typeNames[i],
+        click() {
+          if(isPopup) {
+            world.nodes.push(Factory(typeNames[i], undefined, {x: p5.mouseX, y: p5.mouseY}))
+            isPopup = false;
+          }else{
+            world.nodes.push(Factory(typeNames[i], undefined, {x: p5.width/2 - 100, y: p5.height/2 - 50}))
+          }
+        }
+      });
+
+      switch(types[typeNames[i]].type) {
+        case 'Inputs':
+          input.submenu.append(item);
+          break;
+        case 'Logic':
+          logic.submenu.append(item);
+          break;
+        case 'Math':
+          math.submenu.append(item);
+          break;
+        default:
+          misc.submenu.append(item);
+          break;
+      }
+    }
+
+      menu.append(input);
+      menu.append(math);
+      menu.append(logic);
+      menu.append(misc);
+
+
+    window.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      isPopup = true;
+      menu.popup(remote.getCurrentWindow());
+    }, false);
+    
+    
+    world.on('new-world', () => {
+      world.setOutput(Factory('OutputNode', undefined, {x: p5.width/2 - 100, y: p5.height/2 - 50}));
+    });
+    
+
+    world.clear();
   }
 
   p5.draw = () => {

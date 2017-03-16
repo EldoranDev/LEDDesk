@@ -3,14 +3,12 @@ import { Input } from '../input';
 import { Output } from '../output';
 
 export default class DuplicatorNode extends Node {
-  constructor(params = {}, options = {x: 0, y: 0}) {
+  constructor(params = {}, options = {}) {
     let o = Object.assign(
       {},
       options,
       { 
-        height: 100,
-        width: 200,
-        title: "Duplicator"
+        title: "Duplicator",
       }
     );
     
@@ -40,3 +38,5 @@ export default class DuplicatorNode extends Node {
     ]
   }
 }
+
+DuplicatorNode.type = "Logic";

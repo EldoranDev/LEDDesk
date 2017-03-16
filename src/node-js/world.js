@@ -1,11 +1,17 @@
 import { Factory } from './types/types';
 import { Connection } from './connection';
 
-export class World {
+const EventEmitter = require('events');
+
+export class World extends EventEmitter{
 
   constructor() {
+    super();
+
     this.nodes = [];
     this.connections = [];
+
+    this.output = null;
   }
 
   toJSON(){
@@ -22,6 +28,18 @@ export class World {
   clear() {
     this.connections = [];
     this.nodes = [];
+
+    this.emit('new-world');
+  }
+
+  setOutput(output) {
+    if(this.output != null) {
+      this.output.destroy();
+      this.nodes.splice(this.nodes.indexOf(this.output), 1);      
+    }
+
+    this.output = output;
+    this.nodes.push(output);
   }
 
   load(data) {
