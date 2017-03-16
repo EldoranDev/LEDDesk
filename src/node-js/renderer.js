@@ -60,12 +60,16 @@ export default (p5) => {
       let item = new MenuItem({
         label: typeNames[i],
         click() {
+          let node = null;
           if(isPopup) {
-            world.nodes.push(Factory(typeNames[i], undefined, {x: p5.mouseX, y: p5.mouseY}))
+            node = Factory(typeNames[i], undefined, {x: p5.mouseX, y: p5.mouseY});
             isPopup = false;
           }else{
-            world.nodes.push(Factory(typeNames[i], undefined, {x: p5.width/2 - 100, y: p5.height/2 - 50}))
+            node = Factory(typeNames[i], undefined, {x: p5.width/2 - 100, y: p5.height/2 - 50});
           }
+
+          node.createContent(p5);
+          world.nodes.push(node);
         }
       });
 
@@ -99,7 +103,10 @@ export default (p5) => {
     
     
     world.on('new-world', () => {
-      world.setOutput(Factory('OutputNode', undefined, {x: p5.width/2 - 100, y: p5.height/2 - 50}));
+      let node = Factory('OutputNode', undefined, {x: p5.width/2 - 100, y: p5.height/2 - 50});
+      node.createContent(p5);
+
+      world.setOutput(node);
     });
     
 

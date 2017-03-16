@@ -17,6 +17,10 @@ export class Node {
     this.inputs = [];
     this.outputs = [];
 
+    this.inputCreator = null;
+    this.contentDoms = {};
+    this.contentUpdater = null;
+
     this.options = Object.assign({}, 
     {
       x: 0, 
@@ -37,19 +41,6 @@ export class Node {
 
   }
 
-  /**
-   * Draw the node using p5
-   * @param {number} x 
-   * @param {number} y 
-   * @param {number} width 
-   * @param {number} height 
-   */
-  draw(x, y, width, height) {
-    if(this.error) {
-      stroke(Colors.RED);
-    }
-  }
-
   toJSON() {
     return {
       id: this.id,
@@ -59,11 +50,18 @@ export class Node {
     }
   }
 
-  /**
-   * Draw the content of the node
-   */
-  drawContent() {
-    // Empty because this is the base node
+  createContent(p5) {
+    console.log(this.contentCreator);
+    if(this.contentCreator != null) {
+      this.contentCreator(p5);
+    }
+  }
+
+
+  contentUpdate() {
+    if(this.contentUpdater != null) {
+      this.contentUpdater();
+    }
   }
 
   get connectors() {

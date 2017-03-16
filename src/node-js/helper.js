@@ -5,7 +5,9 @@ export function RenderNode(p5, node, options) {
 
   let o = node.options;
 
-  if(options.selected) {
+  if(node.error) {
+    p5.stroke(Colors.RED);
+  } else if(options.selected) {
     p5.stroke(Colors.YELLOW);
   }
 
@@ -20,6 +22,8 @@ export function RenderNode(p5, node, options) {
   p5.fill(255);
   p5.textAlign(p5.LEFT, p5.CENTER);
   p5.text(o.title, o.x + 10, o.y + 11);
+
+  node.contentUpdate();
 
   // Render Inputs
   let gap = (o.height - RenderSettings.TITLE_HEIGHT) / (node.inputs.length + 1);
@@ -68,7 +72,6 @@ export function RenderNode(p5, node, options) {
     p5.textAlign(p5.RIGHT, p5.CENTER);
     p5.text(con.options.name(), x - RenderSettings.CONNECTOR_SIZE/2 - 2, y);
   }
-
   p5.pop();
 };
 
