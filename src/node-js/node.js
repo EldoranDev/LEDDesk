@@ -77,5 +77,11 @@ export class Node {
         this.connectors[i].connection.destroy();
       }
     }
+
+    let keys = Object.keys(this.contentDoms);
+
+    for(let i = 0; i < keys.length; i++) {
+      this.contentDoms[keys[i]].remove();
+    }
   }
 }

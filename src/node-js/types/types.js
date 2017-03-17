@@ -2,11 +2,15 @@ import OutputNode from './OutputNode';
 import DuplicatorNode from './DuplicatorNode';
 import NumberNode from './NumberNode';
 import ColorNode from './ColorNode';
+import RGBSplitNode from './RGBSplitNode';
+import RGBCombineNode from './RGBCombineNode';
 
 const types = {
   OutputNode,
   DuplicatorNode,
   NumberNode,
+  RGBSplitNode,
+  RGBCombineNode,
   ColorNode,
 };
 
@@ -17,10 +21,6 @@ const Factory = (type, params, options) => {
 };
 
 export {
-  OutputNode,
-  DuplicatorNode,
-  NumberNode,
-  ColorNode,
   Factory,
   types
 };

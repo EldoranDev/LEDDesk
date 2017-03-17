@@ -26,6 +26,10 @@ export class World extends EventEmitter{
   }
 
   clear() {
+    for(let i = 0; i < this.nodes.length; i++) {
+      this.nodes[i].destroy();
+    }
+
     this.connections = [];
     this.nodes = [];
 
@@ -53,6 +57,10 @@ export class World extends EventEmitter{
       let node = Factory(d.nodes[i].type, d.nodes[i].params, d.nodes[i].options);
       node.id = d.nodes[i].id;
       nodes.push(node);
+
+      if(node.constructor.name == 'OutputNode') {
+        this.setOutput(node);
+      }
     }
 
     for(let i = 0; i < d.connections.length; i++) {
@@ -87,6 +95,7 @@ export class World extends EventEmitter{
     this.nodes = nodes;
     this.connections = dummy.connections;
 
+    this.emit('load');
     console.log("Finished Loading");
   }
 }

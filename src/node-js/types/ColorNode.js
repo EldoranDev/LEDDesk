@@ -1,6 +1,7 @@
 import { Node } from '../node';
 import { Input } from '../input';
 import { Output } from '../output';
+import { Color } from '../color';
 
 export default class ColorNode extends Node {
   constructor(params = { color: '#FFFFFF' }, options = {}) {
@@ -18,7 +19,7 @@ export default class ColorNode extends Node {
       new Output(
         this,
         "1", 
-        () => this.params.color,
+        () => new Color(this.params.color),
         {
           color: "#FFF",
           name: () => this.params.color

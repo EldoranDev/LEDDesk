@@ -44,6 +44,11 @@ export default (p5) => {
       submenu: []
     });
 
+    let color = new MenuItem({
+      label: 'Color',
+      submenu: []
+    })
+
     let input = new MenuItem({
       label: 'Inputs',
       submenu: []
@@ -85,6 +90,9 @@ export default (p5) => {
         case 'Math':
           math.submenu.append(item);
           break;
+        case 'Color':
+          color.submenu.append(item);
+          break;
         default:
           misc.submenu.append(item);
           break;
@@ -94,8 +102,8 @@ export default (p5) => {
       menu.append(input);
       menu.append(math);
       menu.append(logic);
+      menu.append(color);
       menu.append(misc);
-
 
     window.addEventListener('contextmenu', (e) => {
       e.preventDefault();
@@ -111,6 +119,12 @@ export default (p5) => {
       world.setOutput(node);
     });
     
+    world.on('load', () => {
+      for(let i = 0; i < world.nodes.length; i++) {
+        world.nodes[i].createContent(p5);
+      }
+    });
+
     world.clear();
   }
 
@@ -148,7 +162,7 @@ export default (p5) => {
 
     p5.push();
     p5.textAlign(p5.LEFT, p5.TOP);
-    p5.text(world.output.inputs[0].value != null ? world.output.inputs[0].value : 'No Output', 0, 0);
+    p5.text("Output: " + (world.output.inputs[0].value != null ? world.output.inputs[0].value : 'No Output'), 0, 0);
     p5.pop();
   }
 
