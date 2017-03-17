@@ -8,6 +8,7 @@ export default class SinNode extends Node {
         {},
         options,
         { 
+          width: 100,
           title: "Sinus",
         }
       );

@@ -1,8 +1,14 @@
 html, body {
   margin: 0;
   overflow: hidden;
+  font-family: Roboto;
 }
 
 ::-webkit-scrollbar { 
     display: none; 
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Light.ttf");
 }

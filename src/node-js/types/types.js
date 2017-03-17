@@ -8,6 +8,11 @@ import CounterNode from './CounterNode';
 import SinNode from './SinNode';
 import AbsNode from './AbsNode';
 import MapNode from './MapNode';
+import TimeNode from './TimeNode';
+import HourNode from './HourNode';
+import MinuteNode from './MinuteNode';
+import SecondNode from './SecondNode';
+
 
 const types = {
   OutputNode,
@@ -20,6 +25,10 @@ const types = {
   AbsNode,
   MapNode,
   SinNode,
+  TimeNode,
+  HourNode,
+  MinuteNode,
+  SecondNode,
 };
 
 console.log(types);

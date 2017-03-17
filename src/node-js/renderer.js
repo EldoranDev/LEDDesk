@@ -31,6 +31,8 @@ export default (p5) => {
 
   p5.setup = () => {
     let renderer = p5.createCanvas(window.innerWidth, window.innerHeight);
+    
+    p5.textFont('Roboto');
 
     let typeNames = Object.keys(types);
     

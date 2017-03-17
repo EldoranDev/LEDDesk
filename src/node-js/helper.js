@@ -23,7 +23,7 @@ export function RenderNode(p5, node, options) {
   p5.textAlign(p5.LEFT, p5.CENTER);
   p5.text(o.title, o.x + 10, o.y + 11);
 
-  node.contentUpdate();
+  node.contentUpdate(p5);
 
   // Render Inputs
   let gap = (o.height - RenderSettings.TITLE_HEIGHT) / (node.inputs.length + 1);

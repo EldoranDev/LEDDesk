@@ -59,9 +59,9 @@ export class Node {
   }
 
 
-  contentUpdate() {
+  contentUpdate(p5) {
     if(this.contentUpdater != null) {
-      this.contentUpdater();
+      this.contentUpdater(p5);
     }
   }
 

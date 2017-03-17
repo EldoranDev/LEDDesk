@@ -11,6 +11,7 @@ export default class RGBSplitNode extends Node {
       {},
       options,
       { 
+        width: 100,
         title: "RGB Split",
       }
     );
@@ -52,7 +53,7 @@ export default class RGBSplitNode extends Node {
       ),
       new Output(
         this,
-        "5",
+        "4",
         () => {
           return this.inputs[0].value.b;
         },

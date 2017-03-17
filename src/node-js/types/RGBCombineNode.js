@@ -11,6 +11,7 @@ export default class RGBCombineNode extends Node {
       {},
       options,
       { 
+        width: 100,
         title: "RGB Combine",
       }
     );

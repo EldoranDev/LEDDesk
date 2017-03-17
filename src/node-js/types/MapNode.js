@@ -8,7 +8,7 @@ export default class MapNode extends Node {
         {},
         options,
         { 
-          title: "Sinus",
+          title: "Map",
         }
       );
 

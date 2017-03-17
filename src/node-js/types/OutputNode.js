@@ -7,6 +7,7 @@ export default class OutputNode extends Node {
       {},
       options,
       { 
+        width: 120,
         title: "Output"
       }
     );
@@ -23,5 +24,18 @@ export default class OutputNode extends Node {
         {color: '#FFF'}
       ),
     ];
+
+    this.contentCreator = (p5) => {
+        
+    };
+
+    this.contentUpdater = (p5) => {
+      p5.push();
+      p5.rectMode(p5.CENTER);
+      p5.fill(this.inputs[0].value ? this.inputs[0].value.toString() : '#000');
+      p5.rect(this.options.x + 60, this.options.y + 60, 50, 50);
+      p5.pop();
+      
+    }
   }
 }

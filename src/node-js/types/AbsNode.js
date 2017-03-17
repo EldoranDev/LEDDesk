@@ -8,6 +8,7 @@ export default class AbsNode extends Node {
         {},
         options,
         { 
+          width: 100,
           title: "Absolute",
         }
       );

@@ -9,6 +9,7 @@ export default class ColorNode extends Node {
       {},
       options,
       { 
+        width: 120,
         title: "Static Color",
       }
     );
@@ -37,7 +38,7 @@ export default class ColorNode extends Node {
     }
 
     this.contentUpdater = (p5) => {
-      this.contentDoms.color.position(this.options.x + 50, this.options.y + 50);
+      this.contentDoms.color.position(this.options.x + 5, this.options.y + 50);
     };
   }
 }
