@@ -73,6 +73,8 @@ export default (p5) => {
         }
       });
 
+      console.log(`Registering node: ${typeNames[i]}`);
+
       switch(types[typeNames[i]].type) {
         case 'Inputs':
           input.submenu.append(item);
@@ -109,7 +111,6 @@ export default (p5) => {
       world.setOutput(node);
     });
     
-
     world.clear();
   }
 
@@ -144,6 +145,11 @@ export default (p5) => {
         p5.pop();  
       }
     }
+
+    p5.push();
+    p5.textAlign(p5.LEFT, p5.TOP);
+    p5.text(world.output.inputs[0].value != null ? world.output.inputs[0].value : 'No Output', 0, 0);
+    p5.pop();
   }
 
   p5.windowResized = () => {
