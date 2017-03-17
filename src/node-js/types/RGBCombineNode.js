@@ -59,9 +59,9 @@ export default class RGBCombineNode extends Node {
         "4", 
         () => {
           return new Color({
-            r: (this.inputs[0].value),
-            g: (this.inputs[1].value),
-            b: (this.inputs[2].value)
+            r: parseInt(this.inputs[0].value),
+            g: parseInt(this.inputs[1].value),
+            b: parseInt(this.inputs[2].value)
           });
         }
       )

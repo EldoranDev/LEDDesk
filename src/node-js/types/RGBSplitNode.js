@@ -36,7 +36,7 @@ export default class RGBSplitNode extends Node {
         },
         {
           color: Colors.RED,
-          name: () => `${(this.inputs[0].value != undefined ? this.inputs[0].value.r : 0)} R`
+          name: () => `${(this.inputs[0].value != undefined ? this.inputs[0].value.r.toFixed(2) : 0)} R`
         }
       ),
             new Output(
@@ -47,7 +47,7 @@ export default class RGBSplitNode extends Node {
         },
         {
           color: Colors.GREEN,
-          name: () => `${(this.inputs[0].value != undefined ? this.inputs[0].value.g : 0)} G`
+          name: () => `${(this.inputs[0].value != undefined ? this.inputs[0].value.g.toFixed(2) : 0)} G`
         }
       ),
       new Output(
@@ -58,7 +58,7 @@ export default class RGBSplitNode extends Node {
         },
         {
           color: Colors.BLUE,
-          name: () => `${(this.inputs[0].value != undefined ? this.inputs[0].value.b : 0)} B`
+          name: () => `${(this.inputs[0].value != undefined ? this.inputs[0].value.b.toFixed(2) : 0)} B`
         }
       )
     ]

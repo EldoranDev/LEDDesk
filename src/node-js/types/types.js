@@ -4,6 +4,10 @@ import NumberNode from './NumberNode';
 import ColorNode from './ColorNode';
 import RGBSplitNode from './RGBSplitNode';
 import RGBCombineNode from './RGBCombineNode';
+import TimerNode from './TimerNode';
+import SinNode from './SinNode';
+import AbsNode from './AbsNode';
+import MapNode from './MapNode';
 
 const types = {
   OutputNode,
@@ -12,6 +16,10 @@ const types = {
   RGBSplitNode,
   RGBCombineNode,
   ColorNode,
+  TimerNode,
+  AbsNode,
+  MapNode,
+  SinNode,
 };
 
 console.log(types);

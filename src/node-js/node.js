@@ -16,6 +16,7 @@ export class Node {
 
     this.inputs = [];
     this.outputs = [];
+    this.data = {};
 
     this.inputCreator = null;
     this.contentDoms = {};

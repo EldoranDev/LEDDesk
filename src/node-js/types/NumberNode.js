@@ -18,13 +18,13 @@ export default class NumberNode extends Node {
       new Output(
         this,
         "1", 
-        () => this.params.number,
+        () => Number(this.params.number),
         {
           color: "#FFF",
           name: () => this.params.number
         }
       ),
-    ]
+    ];
 
     this.contentCreator = (p5) => {
       console.log("CREATION");
