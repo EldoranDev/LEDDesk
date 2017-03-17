@@ -12,6 +12,7 @@ import TimeNode from './TimeNode';
 import HourNode from './HourNode';
 import MinuteNode from './MinuteNode';
 import SecondNode from './SecondNode';
+import GreaterNode from './GreaterNode';
 
 
 const types = {
@@ -29,6 +30,7 @@ const types = {
   HourNode,
   MinuteNode,
   SecondNode,
+  GreaterNode
 };
 
 console.log(types);
