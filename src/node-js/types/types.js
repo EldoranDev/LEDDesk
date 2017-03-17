@@ -4,7 +4,7 @@ import NumberNode from './NumberNode';
 import ColorNode from './ColorNode';
 import RGBSplitNode from './RGBSplitNode';
 import RGBCombineNode from './RGBCombineNode';
-import TimerNode from './TimerNode';
+import CounterNode from './CounterNode';
 import SinNode from './SinNode';
 import AbsNode from './AbsNode';
 import MapNode from './MapNode';
@@ -16,7 +16,7 @@ const types = {
   RGBSplitNode,
   RGBCombineNode,
   ColorNode,
-  TimerNode,
+  CounterNode,
   AbsNode,
   MapNode,
   SinNode,

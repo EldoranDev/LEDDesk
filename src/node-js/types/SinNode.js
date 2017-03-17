@@ -43,3 +43,5 @@ export default class SinNode extends Node {
       ];
     }
 }
+
+SinNode.type = 'Math';

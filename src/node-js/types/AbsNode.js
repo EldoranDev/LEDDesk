@@ -43,3 +43,5 @@ export default class AbsNode extends Node {
       ];
     }
 }
+
+AbsNode.type = 'Math';

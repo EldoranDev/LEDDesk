@@ -49,3 +49,5 @@ export default class CounterNode extends Node {
     clearInterval(this.data.interval);
   }
 }
+
+CounterNode.type = 'Inputs';

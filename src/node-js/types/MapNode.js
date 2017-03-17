@@ -2,7 +2,7 @@ import { Node } from '../node';
 import { Input } from '../input';
 import { Output } from '../output';
 
-export default class SinNode extends Node {
+export default class MapNode extends Node {
     constructor(params = {from: { low: 0, high: 1}, to: { low: 0, high: 255 }}, options = {}) {
       let o = Object.assign(
         {},
@@ -47,3 +47,5 @@ export default class SinNode extends Node {
       return this.params.to.high + (this.params.to.high - this.params.to.low) * (val - this.params.from.high) / (this.params.from.high - this.params.from.low);
     }
 }
+
+MapNode.type = 'Math';

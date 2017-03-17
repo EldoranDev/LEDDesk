@@ -22,7 +22,7 @@ export default class RGBCombineNode extends Node {
         this,
         "1",
         (con) => {
-          return (con != null) ? con.value : null;
+          return (con != null) ? Math.min(255, con.value) : null;
         },
         {
           color: Colors.RED,
@@ -33,7 +33,7 @@ export default class RGBCombineNode extends Node {
         this,
         "2",
         (con) => {
-          return (con != null) ? con.value : null;
+          return (con != null) ? Math.min(255, con.value) : null;
         },
         {
           color: Colors.GREEN,
@@ -44,7 +44,7 @@ export default class RGBCombineNode extends Node {
         this,
         "3",
         (con) => {
-          return (con != null) ? con.value : null;
+          return (con != null) ? Math.min(255, con.value) : null;
         },
         {
           color: Colors.BLUE,
