@@ -27,8 +27,22 @@ export default class NumberNode extends Node {
     ]
 
     this.contentCreator = (p5) => {
-      console.log("CREATION");
-      this.contentDoms.number = p5.createInput(this.params.number);
+      this.contentDoms.number = p5.createInput();
+      this.contentDoms.number.value(this.params.number);
+      this.contentDoms.number.style('width: 40px');
+
+      this.contentDoms.up = p5.createButton("+");
+      this.contentDoms.down = p5.createButton("-");
+
+      this.contentDoms.up.mousePressed(() => {
+        this.params.number++;
+        this.contentDoms.number.value(this.params.number);
+      });
+
+      this.contentDoms.down.mousePressed(() => {
+        this.params.number--;
+        this.contentDoms.number.value(this.params.number);
+      })
 
       this.contentDoms.number.input( () => {
 
@@ -43,7 +57,9 @@ export default class NumberNode extends Node {
     }
 
     this.contentUpdater = (p5) => {
-      this.contentDoms.number.position(this.options.x + 30, this.options.y + 50);
+      this.contentDoms.number.position(this.options.x + 70, this.options.y + 50);
+      this.contentDoms.up.position(this.options.x + 120, this.options.y + 50);
+      this.contentDoms.down.position(this.options.x + 45, this.options.y + 50);
     };
   }
 }

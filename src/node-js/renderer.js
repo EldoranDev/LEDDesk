@@ -216,7 +216,7 @@ export default (p5) => {
 
   p5.keyPressed = () => {
     if(p5.keyCode == p5.DELETE) {
-      if(selection != null) {
+      if(selection != null && !(selection instanceof Output)) {
         selection.destroy();
         world.nodes.splice(world.nodes.indexOf(selection), 1);
       }

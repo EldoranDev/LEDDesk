@@ -51,7 +51,6 @@ export class Node {
   }
 
   createContent(p5) {
-    console.log(this.contentCreator);
     if(this.contentCreator != null) {
       this.contentCreator(p5);
     }
@@ -75,6 +74,13 @@ export class Node {
     for(let i = 0; i < this.connectors.length; i++) {
       if(this.connectors[i].connection != null){
         this.connectors[i].connection.destroy();
+      }
+    }
+
+    let keys = Object.keys(this.contentDoms);
+    for(let i = 0; i < keys.length; i++) {
+      if(this.contentDoms[keys[i]].remove != undefined) {
+        this.contentDoms[keys[i]].remove();
       }
     }
   }
