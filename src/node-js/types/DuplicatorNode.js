@@ -8,6 +8,7 @@ export default class DuplicatorNode extends Node {
       {},
       options,
       { 
+        width: 100,
         title: "Duplicator",
       }
     );

@@ -16,6 +16,7 @@ export class Node {
 
     this.inputs = [];
     this.outputs = [];
+    this.data = {};
 
     this.inputCreator = null;
     this.contentDoms = {};
@@ -57,9 +58,9 @@ export class Node {
   }
 
 
-  contentUpdate() {
+  contentUpdate(p5) {
     if(this.contentUpdater != null) {
-      this.contentUpdater();
+      this.contentUpdater(p5);
     }
   }
 
