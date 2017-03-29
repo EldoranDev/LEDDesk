@@ -1,5 +1,6 @@
 import { RenderNode, InsideNode, InsideNodeTitle, InsideNodeConnector, RenderConnection } from './helper';
 import { Colors } from './colors';
+import { Color } from './color';
 
 import { Connection } from './connection';
 
@@ -8,11 +9,15 @@ import { Input } from './input';
 
 import { types, Factory } from './types/types';
 
+import HardwareDisplay from '../hardware/display';
+
 import { remote } from 'electron';
 
 const { Menu, MenuItem } = remote;
 
 export default (p5) => {
+
+  let hardware = null;
 
   let world = null;
   let selection = null;
@@ -29,37 +34,58 @@ export default (p5) => {
 
   let isPopup = false;
 
+  let fastLoop = null;
+
   p5.setup = () => {
     let renderer = p5.createCanvas(window.innerWidth, window.innerHeight);
     
     p5.textFont('Roboto');
 
+    hardware = new HardwareDisplay(p5);
+
+    console.log(hardware);
+
+    hardware.updatePorts();
+
+    fastLoop = setInterval(() => {
+
+      let output = world.output.inputs[0].value;
+
+      if(output instanceof Color) {
+        if(hardware.serial) {
+          hardware.updateSerial(output);
+        }
+      }
+
+    }, 50);
+
     let typeNames = Object.keys(types);
     
-    let misc = new MenuItem({
-      label: 'Misc',
-      submenu: []
-    });
+    //TODO: Should be reworked or automated
+      let misc = new MenuItem({
+        label: 'Misc',
+        submenu: []
+      });
 
-    let logic = new MenuItem({
-      label: 'Logic',
-      submenu: []
-    });
+      let logic = new MenuItem({
+        label: 'Logic',
+        submenu: []
+      });
 
-    let color = new MenuItem({
-      label: 'Color',
-      submenu: []
-    })
+      let color = new MenuItem({
+        label: 'Color',
+        submenu: []
+      })
 
-    let input = new MenuItem({
-      label: 'Inputs',
-      submenu: []
-    });
+      let input = new MenuItem({
+        label: 'Inputs',
+        submenu: []
+      });
 
-    let math = new MenuItem({
-      label: 'Math',
-      submenu: []
-    });
+      let math = new MenuItem({
+        label: 'Math',
+        submenu: []
+      });
 
     for(let i = 0; i < typeNames.length; i++) {
       if(typeNames[i] === 'OutputNode') continue;
