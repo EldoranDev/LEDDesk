@@ -61,5 +61,9 @@ export default function (p5) {
       comPort.write(`G${color.g}\n`);
       comPort.write(`B${color.b}\n`);
     }
+
+    this.updateKeyboard = function(color)  {
+      //TODO: Update Keyboard using ChromaSDK
+    }
   }
 };
