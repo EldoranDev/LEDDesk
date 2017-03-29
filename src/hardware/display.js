@@ -57,9 +57,12 @@ export default function (p5) {
 
 
     this.updateSerial = function(color) {
-      comPort.write(`R${color.r}\n`);
-      comPort.write(`G${color.g}\n`);
-      comPort.write(`B${color.b}\n`);
+
+      if(comPort != undefined && comPort.isOpen()) {
+        comPort.write(`R${color.r}\n`);
+        comPort.write(`G${color.g}\n`);
+        comPort.write(`B${color.b}\n`);
+      }
     }
 
     this.updateKeyboard = function(color)  {

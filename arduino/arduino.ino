@@ -1,5 +1,5 @@
-#define B 9
-#define G 10
+#define G 9
+#define B 10
 #define W 11
 #define R 6
 
@@ -39,26 +39,15 @@ void loop() {
     
     
     if(dataSize <= 4) {
-     Serial.print("Data: ");
-     Serial.println(data);
-     
-     Serial.print("Color: ");
-     Serial.println(data[0]);
-
      for(i = 1; i <= dataSize; i++) {
       valueBuf[i-1] = data[i];
      }
 
      valueBuf[dataSize-1] = '\0';
 
-     Serial.print("Buffer: ");
-     Serial.println(valueBuf);
-     
      sscanf(valueBuf, "%d", &value);
      newData = true;
     }
-
-    
   }
 
   if(newData) {
@@ -79,4 +68,6 @@ void loop() {
         break;
     }
   }
+  
+  delay(1);
 }
